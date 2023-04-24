@@ -11,7 +11,7 @@ app.use(volleyball);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: FRONTPORT,
   methods: ['GET', 'POST', 'DELETE', 'OPTIONS'], credentials: true,
 }));
 app.get('/', (req, res) => {res.send('INDEX')})
@@ -23,7 +23,7 @@ app.use((err, req, res, next) => {
  res.status(500).send(err.message);
 });
 
-db.sync({ force: false}).then(() => {
+db.sync({ force: false }).then(() => {
  app.listen(PORT, () => {
    console.log(`Server listening on port ${PORT}`);
  });
