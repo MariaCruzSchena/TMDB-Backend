@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 require("dotenv").config();
-const { DB } = process.env;
+const { DB, USER, PASSWORD } = process.env;
 
-module.exports = new Sequelize(DB, null, null, {
+module.exports = new Sequelize(DB, USER, PASSWORD, {
    dialect : 'postgres',
-   host: 'localhost',
+   host: 'dpg-ch38kqaut4m9tsc55e7g-a',
    logging: false,
 })
 
