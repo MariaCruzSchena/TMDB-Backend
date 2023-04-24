@@ -11,7 +11,7 @@ app.use(volleyball);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin: "https://tmdb-frontend-ob4fbsgnj-mariacruzschena.vercel.app/",
+  origin: "https://tmdb-frontend-alpha.vercel.app",
   methods: ['GET', 'POST', 'DELETE', 'OPTIONS'], credentials: true,
 }));
 app.get('/', (req, res) => {res.send('INDEX')})
