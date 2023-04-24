@@ -1,8 +1,7 @@
-
 const axios = require("axios");
 const { User, Favorites } = require("../models/index");
 const { generateToken, validateToken } = require("../config/token");
-const {validateAuth} = require("../middlewares/auth")
+const { validateAuth } = require("../middlewares/auth");
 
 //USERS CONTROLLERS
 const loginUser = async (req, res, next) => {
@@ -39,7 +38,9 @@ const loginUser = async (req, res, next) => {
 const signUpUser = async (req, res, next) => {
   try {
     const { fullName, email, password } = req.body;
+    console.log(fullName, email, password);
     const existsInDB = await User.findOne({ where: { email } });
+    console.log(existsInDB);
 
     if (existsInDB) {
       res.status(400).send({ message: "User already exists" });
@@ -61,6 +62,7 @@ const signUpUser = async (req, res, next) => {
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll();
+    console.log("ALL USERS", users);
     res.status(200).send(users);
   } catch (error) {
     res.status(404).send({ message: "Couldn't find users" });
@@ -70,7 +72,7 @@ const getAllUsers = async (req, res) => {
 const logoutUser = (req, res) => {
   res.clearCookie("token");
   res.sendStatus(204);
-}
+};
 //FAVORITES CONTROLLERS
 
 const addToFavorites = (req, res) => {
@@ -103,8 +105,8 @@ const deleteFromFavorites = async (req, res) => {
 
 const getAllFavorites = async (req, res) => {
   try {
-    const UserId = parseInt(req.params.userId);
-    const favorites = await Favorites.findAll({ where: { UserId } });
+    const userId = parseInt(req.params.userId);
+    const favorites = await Favorites.findAll({ where: { userId } });
     const favoritesWithTypes = favorites.map((fav) => fav.type);
     const favoritesPromises = favorites.map((fav) =>
       axios.get(
@@ -112,6 +114,7 @@ const getAllFavorites = async (req, res) => {
       )
     );
     const favoritesFullfilled = await Promise.all(favoritesPromises);
+    console.log(favoritesFullfilled)
     const favoritesDetailed = favoritesFullfilled.flatMap(
       (response, index) => ({
         ...response.data,

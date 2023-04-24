@@ -60,7 +60,7 @@ User.init(
  
   {
     sequelize: db,
-    modelName: "User",
+    modelName: "user",
     hooks: {
       beforeValidate: async (user) => {
         const salt = bcrypt.genSaltSync(9);

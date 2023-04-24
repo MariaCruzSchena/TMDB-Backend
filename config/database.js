@@ -1,9 +1,13 @@
 const Sequelize = require('sequelize');
-module.exports = new Sequelize('tmdb_rreq', 'cruz', 'eXfZkLvGFARh9cyoaFHHMB3ZCGmvKGcn', {
+require("dotenv").config();
+const { DB } = process.env;
+
+module.exports = new Sequelize(DB, null, null, {
    dialect : 'postgres',
-   host: 'dpg-cg12ebseoogv67686gd0-a',
+   host: 'localhost',
    logging: false,
 })
+
 
 
 

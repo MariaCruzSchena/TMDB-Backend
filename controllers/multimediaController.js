@@ -1,4 +1,6 @@
 const axios = require("axios");
+require("dotenv").config();
+const { APYKEY } = process.env;
 
 const getAllMedia = async (req, res, next) => {
   try {
@@ -7,7 +9,7 @@ const getAllMedia = async (req, res, next) => {
     const search = {
       endpoint: "/search/multi",
       params: {
-        api_key: "66cd97e922cf9113528fada4166f6e6a",
+        api_key: APYKEY,
         language: "en-US",
         query: query,
         page: 1,
@@ -46,7 +48,7 @@ const getSelectedMedia = async (req, res, next) => {
     const baseURL = "https://api.themoviedb.org/3";
     const endpoint = `/${type}/${id}`;
     const params = {
-      api_key: "66cd97e922cf9113528fada4166f6e6a",
+      api_key: APYKEY,
       language: "en-US",
     };
 
@@ -66,7 +68,7 @@ const discoverSelectedType = async (req, res) => {
     const baseURL = "https://api.themoviedb.org/3";
     const endpoint = `/discover/${type}`;
     const params = {
-      api_key: "66cd97e922cf9113528fada4166f6e6a",
+      api_key: APYKEY,
       language: "en-US",
       sort_by: "popularity.desc",
       page: 1,
